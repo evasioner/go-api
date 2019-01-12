@@ -1,7 +1,10 @@
 package controllers
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+)
 
-func test(){
+func Test(c *gin.Context){
 	fmt.Println("test")
 }
