@@ -1,15 +1,7 @@
 package main
 
-import (
-	"github.com/gin-gonic/gin"
-	"rest-api/controllers"
-)
+import "rest-api/route"
 
 func main(){
-	router := gin.Default()
-	v1 := router.Group("/api/v1/test")
-	{
-		v1.GET("", controllers.Test)
-	}
-	router.Run()
+	route.Route()
 }
