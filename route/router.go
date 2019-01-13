@@ -9,12 +9,12 @@ func Route(){
 	router := gin.Default()
 	test := router.Group("/api/v1/test")
 	{
-		test.GET("", controllers.Test)
+		test.GET("", controllers.Tests.Test)
 	}
 
-	member := router.Group("/api/v1/test")
+	member := router.Group("/api/v1/new")
 	{
-		member.GET("member", controllers.Test)
+		member.GET("", controllers.News.News)
 	}
 	router.Run()
 }
