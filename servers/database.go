@@ -2,12 +2,11 @@ package servers
 
 import (
 	"database/sql"
-	"gopkg.in/gorp.v1"
 	_ "github.com/go-sql-driver/mysql"
+	"gopkg.in/gorp.v1"
 	"log"
 	"sync"
 )
-
 
 type database struct {
 	db *gorp.DbMap

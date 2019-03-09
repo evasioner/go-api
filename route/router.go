@@ -25,4 +25,3 @@ func Route() {
 	}
 	router.Run()
 }
-

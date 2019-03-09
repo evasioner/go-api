@@ -5,10 +5,10 @@ import (
 	"rest-api/repositories"
 )
 
-type MemberService struct {}
+type MemberService struct{}
 
 var Member repositories.MemberRepository
 
-func (self MemberService) GetMember() [] models.Member{
+func (self MemberService) GetMember() [] models.Member {
 	return Member.GetMember()
 }
