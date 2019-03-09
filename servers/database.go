@@ -5,23 +5,25 @@ import (
 	"gopkg.in/gorp.v1"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"sync"
 )
 
-type Database struct {
+
+type database struct {
 	db *gorp.DbMap
 }
 
-var Db *Database
-var database = GetInstance()
+var instance *database
+var once sync.Once
 
-func GetInstance() *Database {
-	if Db == nil {
+func Database() *database {
+	once.Do(func() {
 		db, err := sql.Open("mysql", "root:password@/testdb")
 		checkErr(err, "sql.Open failed")
-		dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
-		Db = &Database{db : dbmap}
-	}
-	return Db
+		dbMap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
+		instance = &database{db: dbMap}
+	})
+	return instance
 }
 
 func checkErr(err error, msg string) {
@@ -30,6 +32,6 @@ func checkErr(err error, msg string) {
 	}
 }
 
-func Select() *Database {
-
+func (db *database) GetInstance() *gorp.DbMap {
+	return db.db
 }

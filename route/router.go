@@ -19,16 +19,10 @@ func Route() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	test := router.Group("/api/v1/test")
+	member := router.Group("/api/v1/member")
 	{
-		test.GET("", controllers.Tests.Test)
-	}
-
-	member := router.Group("/api/v1/new")
-	{
-		member.GET("", controllers.News.News)
+		member.GET("", controllers.Member.GetMember)
 	}
 	router.Run()
-
 }
 
