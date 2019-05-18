@@ -5,6 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/gorp.v1"
 	"log"
+	"rest-api/models"
 	"sync"
 )
 
@@ -17,9 +18,10 @@ var once sync.Once
 
 func Database() *database {
 	once.Do(func() {
-		db, err := sql.Open("mysql", "root:password@/testdb")
+		db, err := sql.Open("mysql", "root:password@/testdb?parseTime=true")
 		checkErr(err, "sql.Open failed")
 		dbMap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
+		dbMap.AddTableWithName(models.Member{}, "member").SetKeys(true, "No")
 		instance = &database{db: dbMap}
 	})
 	return instance

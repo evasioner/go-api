@@ -22,6 +22,7 @@ func Route() {
 	member := router.Group("/api/v1/member")
 	{
 		member.GET("", controllers.Member.GetMember)
+		member.POST("", controllers.Member.CreateMember)
 	}
 	router.Run()
 }
